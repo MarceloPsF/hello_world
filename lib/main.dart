@@ -1,45 +1,63 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const MaterialApp(debugShowCheckedModeBanner: false, home: LoginScreen()),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home:ContadorTela());
-  }
-}
+    final largura = MediaQuery.of(context).size.width;
 
-class ContadorTela extends StatefulWidget {
-  const ContadorTela({super.key});
-
-  @override
-  State<ContadorTela> createState() => _ContadorTelaState();
-}
-
-class _ContadorTelaState extends State<ContadorTela> {
-  int contador = 0;
-
-  void incrementar() {
-    setState(() {
-      contador++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
-     appBar: AppBar(title: Text("Exemplo setState")),
-     body: Center(
-      child: Text("Contador: $contador", style: TextStyle(fontSize: 30)),
-     ),
-     floatingActionButton: FloatingActionButton(
-      onPressed: incrementar,
-      child: Icon(Icons.add),
-     ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.all(largura * 0.08),
+          child: Column(
+            children: [
+              const Icon(Icons.lock, color: Colors.lightBlue, size: 80),
+
+              const SizedBox(height: 20),
+
+              const Text("Login", style: TextStyle(fontSize: 24)),
+
+              const SizedBox(height: 20),
+
+              const TextField(
+                decoration: InputDecoration(
+                  labelText: "Email",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+
+              const SizedBox(height: 10),
+
+              const TextField(
+                decoration: InputDecoration(
+                  labelText: "Senha",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+
+              const SizedBox(height: 20),
+
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: const Text("Entrar"),
+                ),
+              ),
+
+              TextButton(onPressed: () {}, child: const Text("Criar conta")),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
